@@ -14,12 +14,17 @@ base_url = 'https://www.saucedemo.com/'
 driver.get(base_url)
 driver.maximize_window()
 
-# Находим на странице поле для ввода имени c помощью кастомного типа XPATH
-user_name = driver.find_element(By.ID, //input[@id='user-name'])
+# Находим на странице поле для ввода имени
+user_name = driver.find_element(By.ID, 'user-name')
 user_name.send_keys('standard_user') # Ввод имени в поле "usesname"
 time.sleep(1) # указываем таймер паузы для проверки корректного ввода
+
 # С помощью другого типа XPATH (*) означает что тут мы ищем по всей странице Id = 'password'
-password = driver.find_element(By.ID, //*[@id='password']
+password = driver.find_element(By.NAME, //*[@id='password'])
 password.send_keys('secret_sauce') # Ввод пароля в поле "password"
-time.sleep(1) # указываем таймер паузы для проверки корректного ввода
-driver.quit() # Команда для полного закрытия окна браузера
+
+#Добавим переменную для поиска нужной кнопки на странице
+button_login = driver.find_element(By.ID, '')
+
+#time.sleep(1) # указываем таймер паузы для проверки корректного ввода
+#driver.quit() # Команда для полного закрытия окна браузера
