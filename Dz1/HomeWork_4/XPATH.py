@@ -18,7 +18,9 @@ driver.maximize_window()
 user_name = driver.find_element(By.ID, //input[@id='user-name'])
 user_name.send_keys('standard_user') # Ввод имени в поле "usesname"
 time.sleep(1) # указываем таймер паузы для проверки корректного ввода
+
 # С помощью другого типа XPATH (*) означает что тут мы ищем по всей странице Id = 'password'
+
 password = driver.find_element(By.ID, //*[@id='password']
 password.send_keys('secret_sauce') # Ввод пароля в поле "password"
 time.sleep(1) # указываем таймер паузы для проверки корректного ввода
