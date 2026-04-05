@@ -20,11 +20,12 @@ user_name.send_keys('standard_user') # Ввод имени в поле "usesname
 time.sleep(1) # указываем таймер паузы для проверки корректного ввода
 
 # С помощью другого типа XPATH (*) означает что тут мы ищем по всей странице Id = 'password'
-password = driver.find_element(By.NAME, //*[@id='password'])
+password = driver.find_element(By.ID, 'password')
 password.send_keys('secret_sauce') # Ввод пароля в поле "password"
 
 #Добавим переменную для поиска нужной кнопки на странице
-button_login = driver.find_element(By.ID, '')
+button_login = driver.find_element(By.ID, 'login-button')
+button_login.click()
 
-#time.sleep(1) # указываем таймер паузы для проверки корректного ввода
-#driver.quit() # Команда для полного закрытия окна браузера
+time.sleep(1) # указываем таймер паузы для проверки корректного ввода
+driver.quit() # Команда для полного закрытия окна браузера
