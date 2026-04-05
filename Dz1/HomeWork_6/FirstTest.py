@@ -7,7 +7,8 @@ from selenium.webdriver.common.by import By
 options = webdriver.ChromeOptions()
 # Сделалил кастомное правило которе не закрывает браузер автоматически после завершения скрипта
 options.add_experimental_option("detach", True)
-
+#Режим Headless в котором браузер не открывается
+options.add_argument("--headless")
 driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
 
 try:
@@ -37,7 +38,7 @@ try:
     page_check = driver.find_element(By.XPATH, "//span[@class='title']")
     print(page_check.text)
     page_check = page_check.text
-    assert page_check == 'Product'
+    assert page_check == 'Products'
     print("Находимся на нужной странице")
 
 except Exception:
