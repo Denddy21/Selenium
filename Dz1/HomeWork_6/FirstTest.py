@@ -31,8 +31,8 @@ try:
 
     current_url = driver.current_url
     print(driver.current_url)
-
-    assert current_url == 'https://www.saucedemo.com/inventory.html'
+    url_get = 'https://www.saucedemo.com/inventory.html'
+    assert current_url == url_get
     print("Url cовпало")
 
     page_check = driver.find_element(By.XPATH, "//span[@class='title']")
@@ -41,9 +41,9 @@ try:
     assert page_check == 'Products'
     print("Находимся на нужной странице")
 
-except Exception:
+except Exception as e:
     # Этот блок сработает только при ошибке
-    print("Тест упал с ошибкой")
+    print("Тест упал с ошибкой", {e})
 
 finally:
     driver.quit()
