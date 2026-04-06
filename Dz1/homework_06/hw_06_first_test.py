@@ -5,46 +5,33 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
 
+# Настройка браузера
 options = webdriver.ChromeOptions()
-# Сделалил кастомное правило которе не закрывает браузер автоматически после завершения скрипта
-options.add_experimental_option("detach", True)
-# Режим Headless в котором браузер не открывается
 options.add_argument("--headless")
+options.add_argument("--window-size=1920,1080")
+
 driver = webdriver.Chrome(options=options, service=ChromeService(ChromeDriverManager().install()))
 
-try:
-    base_url = 'https://www.saucedemo.com/'
-    driver.get(base_url)
-    driver.maximize_window()
+# Переход на сайт
+base_url = 'https://saucedemo.com'
+driver.get(base_url)
 
-    # Находим на странице поле для ввода имени
-    user_name = driver.find_element(By.ID, 'user-name')
-    user_name.send_keys('standard_user')  # Ввод имени в поле "usesname"
-    print("Username passed")
-    # С помощью другого типа XPATH (*) означает что тут мы ищем по всей странице Id = 'password'
-    password = driver.find_element(By.ID, 'password')
-    password.send_keys('secret_sauce')  # Ввод пароля в поле "password"
-    print("Password passed")
-    # Добавим переменную для поиска нужной кнопки на странице
-    button_login = driver.find_element(By.ID, 'login-button')
-    button_login.click()
-    print("Login button pressed")
+# Авторизация
+driver.find_element(By.ID, 'user-name').send_keys('standard_user')
+driver.find_element(By.ID, 'password').send_keys('secret_sauce')
+driver.find_element(By.ID, 'login-button').click()
+print("Login sequence completed")
 
-    current_url = driver.current_url
-    print(driver.current_url)
-    url_get = 'https://www.saucedemo.com/inventory.html'
-    assert current_url == url_get
-    print("Url cовпало")
+# Проверка URL с информативным сообщением об ошибке
+current_url = driver.current_url
+expected_url = 'https://saucedemo.cominventory.html'
+assert current_url == expected_url, f"ОШИБКА URL: Ожидали {expected_url}, получили {current_url}"
+print("URL совпал")
 
-    page_check = driver.find_element(By.XPATH, "//span[@class='title']")
-    print(page_check.text)
-    page_check = page_check.text
-    assert page_check == 'Products'
-    print("Находимся на нужной странице")
+# Проверка заголовка страницы с сообщением об ошибке
+page_title = driver.find_element(By.XPATH, "//span[@class='title']").text
+assert page_title == 'Products', f"ОШИБКА ЗАГОЛОВКА: Ожидали 'Products', получили '{page_title}'"
+print(f"Успешно перешли на страницу: {page_title}")
 
-except Exception as e:
-    # Этот блок сработает только при ошибке
-    print("Тест упал с ошибкой", {e})
-
-finally:
-    driver.quit()
+# Завершение теста
+driver.quit()
