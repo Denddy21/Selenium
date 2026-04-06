@@ -13,16 +13,16 @@ base_url = 'https://www.saucedemo.com'
 driver.get(base_url)
 driver.set_window_size(1920, 1080)
 
-user_name = driver.find_element(By.XPATH, "//input[@id='user-name']" )
+user_name = driver.find_element(By.XPATH, "//input[@id='user-name']")
 user_name.send_keys('standart_use')
 print("Input Login")
 
 # С помощью этого метода нашли поле для ввода пароля и ввели неверный пароль
-password = driver.find_element(By.XPATH, "//input[@id='password']" )
+password = driver.find_element(By.XPATH, "//input[@id='password']")
 password.send_keys('secret_sauce')
 print("Input Password")
 
-bnt_login = driver.find_element(By.XPATH, "//input[@id='login-button']" )
+bnt_login = driver.find_element(By.XPATH, "//input[@id='login-button']")
 bnt_login.click()
 print("Click login button")
 

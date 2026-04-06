@@ -10,7 +10,6 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
 def start_test(browser_name: str) -> None:
-
     driver: webdriver.Remote
 
     if browser_name == 'chrome':
@@ -28,6 +27,7 @@ def start_test(browser_name: str) -> None:
     driver.maximize_window()
     time.sleep(3)
     driver.quit()
+
 
 if __name__ == "__main__":
     # Проверяем, передал ли пользователь название браузера в терминале
